@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ventas Productos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  <img src="IMG/Html.png" alt="HTML logo" class="img-responsive center-block" style="max-width: 20%;">
+  <div class="container">
+    <h1>Ventas Productos</h1>
+    <nav>
+      <ul>
+        <li><a href="Taller1P1,2.html">Punto 1 y 2</a></li>
+        <li><a href="Taller2P3.html">Punto 3</a></li>
+      </ul>
+    </nav>
+    <form>
+      <div class="form-group">
+        <label for="Producto">Producto</label>
+        <input type="text" class="form-control" id="producto" placeholder="Ingrese el nombre del producto">
+      </div>
+      <div class="form-group">
+        <label for="Valor">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" placeholder="Ingrese la cantidad">
+      </div>
+      <div class="form-group">
+        <label for="valor">Valor</label>
+        <input type="number" class="form-control" id="valor" placeholder="Ingrese el valor del producto">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="agregarVenta()">Agregar Venta</button>
+    </form>
+    <hr>
+    <h2>Ventas Realizadas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor Unitario</th>
+          <th>Valor Total</th>
+        </tr>
+      </thead>
+      <tbody id="tablaVentas">
+      </tbody>
+    </table>
+    <h3>Valor Total a Pagar: <span id="valorTotal"></span></h3>
+    <button type="button" class="btn btn-primary" onclick="actualizarValorTotal()">Calcular</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    var ventas = [];
+
+    function agregarVenta() {
+      var producto = document.getElementById("producto").value;
+      var cantidad = parseInt(document.getElementById("cantidad").value);
+      var valor = parseInt(document.getElementById("valor").value);
+      if (producto && cantidad && valor) {
+        ventas.push({producto: producto, cantidad: cantidad, valor: valor});
+        mostrarVentas();
+        //  actualizarValorTotal();
+        document.getElementById("valorTotal").innerHTML = "$";
+      }
+    }
+
+    function mostrarVentas() {
+      var tabla = document.getElementById("tablaVentas");
+      tabla.innerHTML = "";
+      for (var i = 0; i < ventas.length; i++) {
+        var venta = ventas[i];
+        var valorTotal = venta.cantidad * venta.valor;
+        var fila = "<tr><td>" + venta.producto + "</td><td>" + venta.cantidad + "</td><td>" + venta.valor + "</td><td>" + valorTotal + "</td></tr>";
+        tabla.innerHTML += fila;
+      }
+    }
+
+    function actualizarValorTotal() {
+      var valorTotal = 0;
+      for (var i = 0; i < ventas.length; i++) {
+        var venta = ventas[i];
+        var valorTotalVenta = venta.cantidad * venta.valor;
+        valorTotal += valorTotalVenta;
+      }
+      document.getElementById("valorTotal").innerHTML = "$" + valorTotal;
+    }
+  </script>
+</body>
+</html>

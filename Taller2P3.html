@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ingrese cuatro números</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Importar Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+	<img src="IMG/JavaScript-logo.jpg.crdownload" alt="JS logo" class="img-responsive center-block" style="max-width: 20%;">
+	<div class="container">
+		<h1>Ingrese cuatro números</h1>
+		<nav>
+			<ul>
+			  <li><a href="Taller1P1,2.html">Punto 1 y 2</a></li>
+			  <li><a href="Taller2P3.html">Punto 3 arreglo</a></li>
+			</ul>
+		<div class="form-group">
+			<label for="num1">primer digito:</label>
+			<input type="number" class="form-control" id="num1" required>
+		</div>
+		<div class="form-group">
+			<label for="num2">Segundo dijito:</label>
+			<input type="number" class="form-control" id="num2" required>
+		</div>
+		<div class="form-group">
+			<label for="num3">Tercer dijito:</label>
+			<input type="number" class="form-control" id="num3" required>
+		</div>
+		<div class="form-group">
+			<label for="num4">Cuarto dijito:</label>
+			<input type="number" class="form-control" id="num4" required>
+		</div>
+		<button type="button" class="btn btn-primary" onclick="calcular()">Calcular</button>
+		<p id="resultado"></p>
+	</div>
+
+	<!-- Importar jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Importar Bootstrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script>
+		function calcular() {
+			var num1 = parseFloat($('#num1').val());
+			var num2 = parseFloat($('#num2').val());
+			var num3 = parseFloat($('#num3').val());
+			var num4 = parseFloat($('#num4').val());
+
+			// Verificar que no haya números iguales
+			if (num1 === num2 || num1 === num3 || num1 === num4 || num2 === num3 || num2 === num4 || num3 === num4) {
+				alert("Los números no pueden ser iguales.");
+				return;
+			}
+
+			// Calcular el número mayor y el número menor
+			var numeros = [num1, num2, num3, num4];
+			var mayor = Math.max.apply(null, numeros);
+			var menor = Math.min.apply(null, numeros);
+
+			// Eliminar el número mayor del arreglo
+			numeros.splice(numeros.indexOf(mayor), 1);
+
+			// Mostrar el resultado
+			$('#resultado').html("El número mayor es " + mayor + ", el número menor es " + menor + ", y el arreglo sin el número mayor es [" + numeros.join(", ") + "].");
+		}
+	</script>
+</body>
+</html>
